@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ContentPage = () => {
+const NoteDetailPage = () => {
   return (
-    <div>ContentPage</div>
+    <div>NoteDetailPage</div>
   )
 }
 
-export default ContentPage
+export default NoteDetailPage
