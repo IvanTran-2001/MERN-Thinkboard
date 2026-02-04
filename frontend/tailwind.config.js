@@ -9,6 +9,6 @@ export default {
   plugins: [daisyui],
   
   daisyui: {
-    themes: ["lemonade", "cupcake", "synthwave"],
+    themes: ["lemonade", "cupcake", "synthwave", "cyberpunk", "coffee", "forest"],
   },
 }
