@@ -10,7 +10,13 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();
 
-app.use(express.json());
+app.use(express.json()); // TThis middleware to parse JSON bodies
+
+// app.use((req,res,next) => {
+//   console.log(`Req Method is ${req.method} & Req URL is ${req.path}`);
+//   next();
+// });
+
 app.use("/api/notes", notesRoutes);
 
 app.listen(PORT, () => {
