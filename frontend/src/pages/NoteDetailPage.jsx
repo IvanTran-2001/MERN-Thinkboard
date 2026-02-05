@@ -58,11 +58,12 @@ const NoteDetailPage = () => {
 
       await api.put(`/notes/${id}`, { title: note.title, content: note.content });
       toast.success("Note updated successfully!");
-
       navigate(`/`);
+
     } catch (error) {
       console.log("Error saving note:", error);
       toast.error("Failed to save note. Please try again.");
+      
     } finally {
       setSaving(false);
     }
