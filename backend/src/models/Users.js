@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 // 1-create schema
 // 2- model base of that scehma
@@ -9,16 +10,21 @@ const userSchema = new mongoose.Schema(
     userName: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
     },
 
     email: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
     },
-    
+
     password: {
       type: String,
       required: true,
+      minlength: 6,
     },
   },
   { timestamps: true },
