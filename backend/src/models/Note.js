@@ -15,8 +15,14 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",  // Links to User model
+      required: true
+  }
   },
   { timestamps: true },
+  
 );
 
 // model

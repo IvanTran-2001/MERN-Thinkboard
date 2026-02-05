@@ -3,5 +3,5 @@ export const AUTH_ERRORS = {
   INVALID_TOKEN: "Invalid token",
   TOKEN_EXPIRED: "Token expired",
   USER_NOT_FOUND: "User not found",
-  NOT_AUTHORIZED: "Not authorized"
+  NOT_AUTHORIZED: "Not authorized",
 };
