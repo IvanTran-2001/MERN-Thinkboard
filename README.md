@@ -27,6 +27,7 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **React 18** - Modern UI library with hooks
 - **Vite** - Lightning-fast build tool and dev server
 - **TailwindCSS** - Utility-first CSS framework
@@ -36,6 +37,7 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 - **React Router** - Client-side routing
 
 ### Backend
+
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web application framework
 - **MongoDB** - NoSQL database
@@ -48,12 +50,15 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 ## 📸 Screenshots
 
 ### Home Page - Notes Grid
+
 ![Home Page](https://via.placeholder.com/800x450/4f46e5/ffffff?text=Home+Page+-+Add+Your+Screenshot)
 
 ### Create Note Page
+
 ![Create Note](https://via.placeholder.com/800x450/10b981/ffffff?text=Create+Note+-+Add+Your+Screenshot)
 
 ### Note Detail & Edit
+
 ![Note Detail](https://via.placeholder.com/800x450/f59e0b/ffffff?text=Note+Detail+-+Add+Your+Screenshot)
 
 > **Tip:** Replace the placeholder URLs above with your actual screenshots!
@@ -71,6 +76,7 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/MERN-Thinkboard.git
    cd MERN-Thinkboard
@@ -103,6 +109,7 @@ UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
 ### Running Locally
 
 #### Option 1: Run Both (Frontend & Backend) Concurrently
+
 ```bash
 npm run dev
 ```
@@ -110,18 +117,21 @@ npm run dev
 #### Option 2: Run Separately
 
 **Backend:**
+
 ```bash
 cd backend
 npm run dev
 ```
 
 **Frontend:**
+
 ```bash
 cd frontend
 npm run dev
 ```
 
 The app will be available at:
+
 - **Frontend:** `http://localhost:5173`
 - **Backend:** `http://localhost:5001`
 
@@ -171,13 +181,13 @@ MERN-Thinkboard/
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint        | Description          |
-|--------|----------------|----------------------|
-| GET    | `/api/notes`    | Get all notes        |
-| GET    | `/api/notes/:id`| Get note by ID       |
-| POST   | `/api/notes`    | Create a new note    |
-| PUT    | `/api/notes/:id`| Update note by ID    |
-| DELETE | `/api/notes/:id`| Delete note by ID    |
+| Method | Endpoint         | Description       |
+| ------ | ---------------- | ----------------- |
+| GET    | `/api/notes`     | Get all notes     |
+| GET    | `/api/notes/:id` | Get note by ID    |
+| POST   | `/api/notes`     | Create a new note |
+| PUT    | `/api/notes/:id` | Update note by ID |
+| DELETE | `/api/notes/:id` | Delete note by ID |
 
 ---
 
@@ -188,11 +198,13 @@ This app is deployed on **Render** with the following configuration:
 ### Backend + Frontend Combined Deployment on Render
 
 1. **Build Command:**
+
    ```bash
    npm install && npm run build
    ```
 
 2. **Start Command:**
+
    ```bash
    npm run start
    ```

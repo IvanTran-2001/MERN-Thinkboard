@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router'
-import { useParams, Link } from 'react-router';
-import api from '../lib/axios';
-import toast from 'react-hot-toast';
-import { LoaderIcon, Trash2Icon, ArrowLeftIcon } from 'lucide-react';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useParams, Link } from "react-router";
+import api from "../lib/axios";
+import toast from "react-hot-toast";
+import { LoaderIcon, Trash2Icon, ArrowLeftIcon } from "lucide-react";
 
 const NoteDetailPage = () => {
   const [note, setNote] = React.useState(null);
@@ -22,11 +22,10 @@ const NoteDetailPage = () => {
       } catch (error) {
         console.error("Error fetching note:", error);
         toast.error("Failed to fetch note. Please try again.");
-        
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     fetchNote();
   }, [id]);
@@ -39,14 +38,12 @@ const NoteDetailPage = () => {
       await api.delete(`/notes/${id}`);
       toast.success("Note deleted successfully!");
       navigate(`/`);
-
     } catch (error) {
       console.log("Error deleting note:", error);
       toast.error("Failed to delete note. Please try again.");
     }
-  }
+  };
   const handleSave = async (e) => {
-
     e.preventDefault();
     if (note.title.trim() === "" || note.content.trim() === "") {
       toast.error("Title and content cannot both be empty.");
@@ -55,24 +52,26 @@ const NoteDetailPage = () => {
 
     setSaving(true);
     try {
-
-      await api.put(`/notes/${id}`, { title: note.title, content: note.content });
+      await api.put(`/notes/${id}`, {
+        title: note.title,
+        content: note.content,
+      });
       toast.success("Note updated successfully!");
       navigate(`/`);
-
     } catch (error) {
       console.log("Error saving note:", error);
       toast.error("Failed to save note. Please try again.");
-      
     } finally {
       setSaving(false);
     }
-  }
+  };
 
   if (loading) {
-    return (<div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <LoaderIcon className="animate-spin size-10" />
-    </div>)
+    return (
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
+        <LoaderIcon className="animate-spin size-10" />
+      </div>
+    );
   }
   return (
     <div className="min-h-screen bg-base-200">
@@ -83,7 +82,10 @@ const NoteDetailPage = () => {
               <ArrowLeftIcon className="h-5 w-5" />
               Back to Notes
             </Link>
-            <button onClick={handleDelete} className="btn btn-error btn-outline">
+            <button
+              onClick={handleDelete}
+              className="btn btn-error btn-outline"
+            >
               <Trash2Icon className="h-5 w-5" />
               Delete Note
             </button>
@@ -102,7 +104,7 @@ const NoteDetailPage = () => {
                   onChange={(e) => setNote({ ...note, title: e.target.value })}
                 />
               </div>
-              
+
               <div className="form-control mb-4">
                 <label className="label">
                   <span className="label-text">Content</span>
@@ -111,12 +113,18 @@ const NoteDetailPage = () => {
                   placeholder="Write your note here..."
                   className="textarea textarea-bordered h-32"
                   value={note.content}
-                  onChange={(e) => setNote({ ...note, content: e.target.value })}
+                  onChange={(e) =>
+                    setNote({ ...note, content: e.target.value })
+                  }
                 />
               </div>
 
               <div className="card-actions justify-end">
-                <button className="btn btn-primary" disabled={saving} onClick={handleSave}>
+                <button
+                  className="btn btn-primary"
+                  disabled={saving}
+                  onClick={handleSave}
+                >
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
               </div>
@@ -125,7 +133,7 @@ const NoteDetailPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NoteDetailPage
+export default NoteDetailPage;

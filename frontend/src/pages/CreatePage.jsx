@@ -24,18 +24,19 @@ const CreatePage = () => {
       await api.post("/notes", { title, content });
       toast.success("Note created successfully!");
       navigate(`/`);
-
     } catch (error) {
       console.log("Error creating note:", error);
       if (error.response?.status === 429) {
-        toast.error("Slow Down! You're creating notes too quickly. Please wait a moment and try again.", {
-          duration: 5000,
-          icon: "💀",
-        });
+        toast.error(
+          "Slow Down! You're creating notes too quickly. Please wait a moment and try again.",
+          {
+            duration: 5000,
+            icon: "💀",
+          },
+        );
       } else {
         toast.error("Failed to create note. Please try again.");
       }
-
     } finally {
       setLoading(false);
     }
@@ -58,13 +59,13 @@ const CreatePage = () => {
                   <label className="label">
                     <span className="label-text">Title</span>
                   </label>
-                  <input type="text"
+                  <input
+                    type="text"
                     placeholder="Note Title"
-                    className ="input input-bordered"
+                    className="input input-bordered"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
-
                 </div>
 
                 <div className="form-control mb-4">
@@ -80,18 +81,21 @@ const CreatePage = () => {
                 </div>
 
                 <div className="card-actions justify-end">
-                  <button type="submit" className="btn btn-primary" disabled={loading}>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={loading}
+                  >
                     {loading ? "Creating..." : "Create Note"}
                   </button>
                 </div>
-
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreatePage
+export default CreatePage;
