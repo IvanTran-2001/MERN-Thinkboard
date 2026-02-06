@@ -1,9 +1,19 @@
 import User from "../models/Users.js";
 import { generateToken } from "../utils/generateToken.js";
+import {
+  validateRegisterCredentials,
+  validateLoginCredentials,
+} from "../utils/validation.js";
 
 export async function registerUser(req, res) {
   try {
     const { userName, email, password } = req.body;
+
+    // Validate input
+    const validation = validateRegisterCredentials(userName, email, password);
+    if (!validation.isValid) {
+      return res.status(400).json({ message: validation.errors[0] });
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -35,6 +45,12 @@ export async function registerUser(req, res) {
 export async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
+
+    // Validate input
+    const validation = validateLoginCredentials(email, password);
+    if (!validation.isValid) {
+      return res.status(400).json({ message: validation.errors[0] });
+    }
 
     // Find user by email
     const user = await User.findOne({ email });
