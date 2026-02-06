@@ -2,6 +2,7 @@ import React from 'react'
 import api from '../lib/axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 const LoginForm = () => {
     const [email, setEmail] = React.useState("");
@@ -84,10 +85,26 @@ const LoginForm = () => {
                         className="btn btn-primary"
                         disabled={loading}
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {loading ? (
+                        <>
+                            <span className="loading loading-dots loading-md"></span>
+                            Signing in...
+                        </>
+                        ) : (
+                        "Sign In"
+                        )}
                     </button>
                 </div>
             </form>
+
+            <div className="text-center mt-4">
+                <p className="text-sm">
+                    Don't have an account?{" "}
+                    <Link to="/register" className="link link-primary">
+                    Sign up
+                    </Link>
+                </p>
+            </div>
             
         </div>
     </div>
