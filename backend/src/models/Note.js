@@ -17,12 +17,11 @@ const noteSchema = new mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",  // Links to User model
-      required: true
-  }
+      ref: "User", // Links to User model
+      required: true,
+    },
   },
   { timestamps: true },
-  
 );
 
 // model

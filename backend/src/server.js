@@ -31,7 +31,6 @@ app.use("/api/auth", rateLimiter, authRoutes); // Auth routes with rate limiter 
 // Routes
 app.use("/api/notes", notesRoutes);
 
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
