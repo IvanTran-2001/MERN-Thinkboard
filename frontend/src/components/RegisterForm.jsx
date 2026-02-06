@@ -4,8 +4,9 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [email, setEmail] = React.useState("");
+  const [userName, setUserName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
@@ -15,11 +16,12 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      // Make API call to login endpoint
-      const res = await api.post("/auth/login", { email, password });
+      // Make API call to register endpoint
+      const res = await api.post("/auth/register", { userName,email, password });
 
       // Clear form fields
       setEmail("");
+      setUserName("");
       setPassword("");
 
       // Store token in localStorage
@@ -27,17 +29,17 @@ const LoginForm = () => {
       localStorage.setItem("token", token);
 
       // Show success message and redirect to home page
-      toast.success("Login successful!");
-      navigate("/home"); // Redirect to home page after successful login
+      toast.success("Registration successful!");
+      navigate("/home"); // Redirect to home page after successful registration
     } catch (error) {
       setPassword("");
-      console.log("Error logging in:", error);
+      console.log("Error registering:", error);
       if (error.response?.status === 400) {
-        toast.error(error.response.data.message || "Invalid credentials");
+        toast.error(error.response.data.message || "Invalid registration details");
       } else if (error.response?.status === 429) {
-        toast.error("Too many login attempts. Please try again later.");
+        toast.error("Too many registration attempts. Please try again later.");
       } else {
-        toast.error("An error occurred during login. Please try again.");
+        toast.error("An error occurred during registration. Please try again.");
       }
     } finally {
       setLoading(false);
@@ -47,9 +49,22 @@ const LoginForm = () => {
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <h1 className="text-2xl font-bold text-primary font-mono tracking-tighter">
-          Login
+          Create Account
         </h1>
         <form onSubmit={handleSubmit}>
+        <div className="form-control">
+            <div className="label">
+              <span className="label-text">Email</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Username"
+              className="input input-bordered"
+              disabled={loading}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
           <div className="form-control">
             <div className="label">
               <span className="label-text">Email</span>
@@ -85,11 +100,11 @@ const LoginForm = () => {
             >
               {loading ? (
                 <>
-                Signing in
+                Signing Up
                   <span className="loading loading-dots loading-md"></span>
                 </>
               ) : (
-                "Sign In"
+                "Sign Up"
               )}
             </button>
           </div>
@@ -97,9 +112,9 @@ const LoginForm = () => {
 
         <div className="text-center mt-4">
           <p className="text-sm">
-            Don't have an account?{" "}
-            <Link to="/register" className="link link-primary">
-              Sign up
+            Already have an account?{" "}
+            <Link to="/" className="link link-primary">
+              Sign in
             </Link>
           </p>
         </div>
@@ -108,4 +123,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
