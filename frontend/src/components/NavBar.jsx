@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
 import { PlusIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const NavBar = () => {
   const [userName, _] = React.useState("User"); // Placeholder for user name
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/"; // Redirect to login page after logout
+    toast.success("Logged out successfully!");
+    localStorage.removeItem("token"); // Show logout success message
+    navigate("/"); // Redirect to login page after logout
   };
 
   return (
@@ -24,7 +28,7 @@ const NavBar = () => {
             </Link>
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost">
-                {userName} {/* or user icon */}
+                {userName} 
               </label>
               <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-50">
                 <li>
