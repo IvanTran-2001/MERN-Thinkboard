@@ -14,18 +14,31 @@ const LoginForm = () => {
         setLoading(true);
         
         try {      
-            await api.post("/login", { email, password });
-            toast.success("Login successful!");
+
+            // Make API call to login endpoint
+            const res = await api.post("/auth/login", { email, password });
+
+            // Clear form fields
             setEmail("");
             setPassword("");
+
+            // Store token in localStorage
+            const token = res.data.token;
+            localStorage.setItem("token", token);
+
+            // Show success message and redirect to home page
+            toast.success("Login successful!");
             navigate("/home"); // Redirect to home page after successful login
         } catch (error) {
             setPassword("");
             console.log("Error logging in:", error);
             if (error.response?.status === 400) {
-                toast.error("Invalid email or password.");
+                toast.error(error.response.data.message || "Invalid credentials");
+            } else if (error.response?.status === 429) {
+                toast.error("Too many login attempts. Please try again later.");
+            } else {
+                toast.error("An error occurred during login. Please try again.");
             }
-            toast   
         
         } finally {
             setLoading(false);
