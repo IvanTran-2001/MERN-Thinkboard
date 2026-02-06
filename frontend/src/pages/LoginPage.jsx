@@ -3,9 +3,9 @@ import MinalNavbar from "../components/MinalNavbar";
 
 const LoginPage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <MinalNavbar />
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex-1 flex items-center justify-center">
         <LoginForm />
       </div>
 
