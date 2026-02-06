@@ -1,4 +1,6 @@
 import express from "express";
+import rateLimiter from "../middleware/rateLimiter.js";
+
 import {
   getAllNotes,
   getNoteById,
@@ -12,6 +14,7 @@ import { protect } from "../middleware/auth.js";
 const router = express.Router();
 
 router.use(protect);
+router.use(rateLimiter);
 
 router.get("/", getAllNotes);
 router.get("/:id", getNoteById);

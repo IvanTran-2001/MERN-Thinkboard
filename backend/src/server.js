@@ -20,17 +20,17 @@ if (process.env.NODE_ENV !== "production") {
     }),
   );
 }
-app.use(express.json()); // TThis middleware to parse JSON bodies
-app.use(rateLimiter);
+app.use(express.json()); // This middleware to parse JSON bodies
 
 // app.use((req,res,next) => {
 //   console.log(`Req Method is ${req.method} & Req URL is ${req.path}`);
 //   next();
 // });
+app.use("/api/auth", rateLimiter, authRoutes); // Auth routes with rate limiter with IP
 
 // Routes
 app.use("/api/notes", notesRoutes);
-app.use("/api/auth", authRoutes);
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
