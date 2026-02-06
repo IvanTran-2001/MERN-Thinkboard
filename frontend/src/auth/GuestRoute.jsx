@@ -1,9 +1,13 @@
-import React from 'react'
+import { Navigate, Outlet } from "react-router"; 
 
 const GuestRoute = () => {
-  return (
-    <div>GuestRoute</div>
-  )
-}
+  const token = localStorage.getItem("token");
 
-export default GuestRoute
+  if (token) {
+    // Already logged in? Send to home
+    return <Navigate to="/home" replace />;
+  }
+
+  return <Outlet />;
+};
+export default GuestRoute;

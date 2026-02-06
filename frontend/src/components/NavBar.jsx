@@ -28,7 +28,7 @@ const NavBar = () => {
             </Link>
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost">
-                {userName} 
+                {userName}
               </label>
               <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-50">
                 <li>
