@@ -37,7 +37,7 @@ const NoteDetailPage = () => {
     try {
       await api.delete(`/notes/${id}`);
       toast.success("Note deleted successfully!");
-      navigate(`/`);
+      navigate(`/home`);
     } catch (error) {
       console.log("Error deleting note:", error);
       toast.error("Failed to delete note. Please try again.");
@@ -78,7 +78,7 @@ const NoteDetailPage = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-6">
-            <Link to="/" className="btn btn-ghost">
+            <Link to="/home" className="btn btn-ghost">
               <ArrowLeftIcon className="h-5 w-5" />
               Back to Notes
             </Link>
