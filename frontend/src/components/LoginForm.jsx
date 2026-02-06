@@ -1,29 +1,31 @@
 import React from 'react'
 import api from '../lib/axios';
 import toast from 'react-hot-toast';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const LoginForm = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         
-        try {
+        try {      
             await api.post("/login", { email, password });
             toast.success("Login successful!");
             setEmail("");
             setPassword("");
-            Navigate("/home"); // Redirect to home page after successful login
+            navigate("/home"); // Redirect to home page after successful login
         } catch (error) {
             setPassword("");
             console.log("Error logging in:", error);
             if (error.response?.status === 400) {
                 toast.error("Invalid email or password.");
             }
+            toast   
         
         } finally {
             setLoading(false);
