@@ -3,14 +3,13 @@ import { Link } from "react-router";
 import { PlusIcon } from "lucide-react";
 
 const NavBar = () => {
-
   const [userName, _] = React.useState("User"); // Placeholder for user name
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/"; // Redirect to login page after logout
-  }
-  
+  };
+
   return (
     <header className="bg-base-300 border-b border-base-content/10">
       <div className="mx-auto max-w-6xl p-4">
@@ -28,9 +27,15 @@ const NavBar = () => {
                 {userName} {/* or user icon */}
               </label>
               <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-50">
-                <li><a>Profile</a></li>
-                <li><a>Settings</a></li>
-                <li><button onClick={handleLogout}>Logout</button></li>
+                <li>
+                  <a>Profile</a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <button onClick={handleLogout}>Logout</button>
+                </li>
               </ul>
             </div>
           </div>
