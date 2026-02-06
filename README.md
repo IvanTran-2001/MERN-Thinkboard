@@ -1,8 +1,8 @@
 # 📝 MERN Thinkboard
 
-A full-stack note-taking application built with the MERN stack (MongoDB, Express, React, Node.js). Create, read, update, and delete notes with a clean, modern interface powered by TailwindCSS and DaisyUI.
+A full-stack authenticated note-taking application built with the MERN stack (MongoDB, Express, React, Node.js). Securely create, manage, and organize your personal notes with JWT authentication, protected routes, and a clean modern interface powered by TailwindCSS and DaisyUI.
 
-![MERN Stack](https://img.shields.io/badge/Stack-MERN-green) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen) ![React](https://img.shields.io/badge/Frontend-React-blue) ![Node.js](https://img.shields.io/badge/Backend-Node.js-green) ![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38bdf8)
+![MERN Stack](https://img.shields.io/badge/Stack-MERN-green) ![MongoDB](https://img.shields.io/badge/Database-MongoDB-brightgreen) ![React](https://img.shields.io/badge/Frontend-React-blue) ![Node.js](https://img.shields.io/badge/Backend-Node.js-green) ![TailwindCSS](https://img.shields.io/badge/Styling-TailwindCSS-38bdf8) ![JWT](https://img.shields.io/badge/Auth-JWT-orange)
 
 ## 🌐 Live Demo
 
@@ -14,13 +14,18 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 
 ## ✨ Features
 
-- **� RESTful API** - Full CRUD functionality with proper HTTP methods and status codes
+- **🔐 JWT Authentication** - Secure user authentication with JSON Web Tokens (7-day expiration)
+- **👤 User Accounts** - Register, login, and manage personal accounts with password hashing (bcrypt)
+- **🔒 Protected Routes** - Frontend and backend route protection ensuring only authenticated users can access their notes
+- **📝 User-Specific Notes** - Each user's notes are private and isolated from other users
+- **🔌 RESTful API** - Full CRUD functionality with proper HTTP methods and status codes
 - **🎨 Modern UI/UX** - Clean, responsive design with TailwindCSS and DaisyUI
 - **🚀 Real-time Updates** - Instant feedback with toast notifications
-- **🛡️ Rate Limiting** - Built-in API rate limiting using Upstash Redis for security
+- **🛡️ Smart Rate Limiting** - IP-based rate limiting for auth routes, user-based for protected routes using Upstash Redis
 - **📱 Responsive Design** - Works perfectly on desktop, tablet, and mobile devices
 - **⚡ Fast Performance** - Optimized backend with MongoDB indexing
-- **🔒 Input Validation** - Client and server-side validation for data integrity
+- **✅ Input Validation** - Client and server-side validation for email, password, and username formats
+- **🔄 Axios Interceptors** - Automatic token attachment to all authenticated requests
 
 ---
 
@@ -41,9 +46,12 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 - **Node.js** - JavaScript runtime
 - **Express.js** - Web application framework
 - **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
+- **Mongoose** - MongoDB object modeling with schema validation
+- **JWT (jsonwebtoken)** - Secure token-based authentication
+- **bcryptjs** - Password hashing and verification
 - **Upstash Redis** - Serverless Redis for rate limiting
 - **CORS** - Cross-Origin Resource Sharing enabled
+- **dotenv** - Environment variable management
 
 ---
 
@@ -69,6 +77,7 @@ A full-stack note-taking application built with the MERN stack (MongoDB, Express
 
 ### Prerequisites
 
+- **Postman** (optional, for API testing - [Download Postman](https://www.postman.com/))
 - **Node.js** (v16 or higher)
 - **MongoDB** account ([MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - **Upstash** account ([Upstash Redis](https://upstash.com/))
@@ -98,12 +107,24 @@ Create a `.env` file in the `backend` directory:
 # MongoDB Connection
 MONGO_URI=your_mongodb_connection_string
 
+# JWT Secret (generate a secure random string)
+JWT_SECRET=your_secure_random_64_character_hex_string
+
 # Server Port
 PORT=5001
+
+# Node Environment
+NODE_ENV=development
 
 # Upstash Redis (for rate limiting)
 UPSTASH_REDIS_REST_URL=your_upstash_redis_url
 UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
+```
+
+**Generate a secure JWT_SECRET:**
+
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 ```
 
 ### Running Locally
@@ -132,8 +153,8 @@ npm run dev
 
 The app will be available at:
 
-- **Frontend:** `http://localhost:5173`
-- **Backend:** `http://localhost:5001`
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:5001
 
 ---
 
@@ -144,50 +165,155 @@ MERN-Thinkboard/
 ├── backend/
 │   ├── src/
 │   │   ├── config/
-│   │   │   ├── db.js              # MongoDB connection
-│   │   │   └── upstash.js         # Redis rate limiter config
+│   │   │   ├── db.js                  # MongoDB connection
+│   │   │   └── upstash.js             # Redis rate limiter config
+│   │   ├── constants/
+│   │   │   └── authMessages.js        # Auth error message constants
 │   │   ├── controllers/
-│   │   │   └── notesController.js # Business logic for notes
+│   │   │   ├── authController.js      # Auth logic (register/login/logout)
+│   │   │   └── notesController.js     # Business logic for notes
 │   │   ├── middleware/
-│   │   │   └── rateLimiter.js     # Rate limiting middleware
+│   │   │   ├── auth.js                # JWT verification middleware
+│   │   │   └── rateLimiter.js         # Rate limiting middleware
 │   │   ├── models/
-│   │   │   └── Note.js            # Mongoose Note schema
+│   │   │   ├── Note.js                # Mongoose Note schema (with user ref)
+│   │   │   └── Users.js               # Mongoose User schema
 │   │   ├── routes/
-│   │   │   └── notesRoutes.js     # API routes
-│   │   └── server.js              # Express app entry point
+│   │   │   ├── authRoutes.js          # Authentication routes
+│   │   │   └── notesRoutes.js         # Protected notes routes
+│   │   ├── utils/
+│   │   │   ├── generateToken.js       # JWT token generation
+│   │   │   └── validation.js          # Input validation helpers
+│   │   └── server.js                  # Express app entry point
 │   └── package.json
 ├── frontend/
 │   ├── src/
+│   │   ├── auth/
+│   │   │   ├── GuestRoute.jsx         # Redirect authenticated users
+│   │   │   └── ProtectedRoute.jsx     # Protect routes (require auth)
 │   │   ├── components/
-│   │   │   ├── NavBar.jsx         # Navigation component
-│   │   │   ├── NoteCard.jsx       # Individual note display
-│   │   │   ├── NotesNotFound.jsx  # Empty state component
-│   │   │   └── RateLimitedUI.jsx  # Rate limit warning
+│   │   │   ├── LoginForm.jsx          # Login form component
+│   │   │   ├── MinalNavbar.jsx        # Minimal navbar for auth pages
+│   │   │   ├── NavBar.jsx             # Main navigation with logout
+│   │   │   ├── NoteCard.jsx           # Individual note display
+│   │   │   ├── NotesNotFound.jsx      # Empty state component
+│   │   │   ├── RateLimitedUI.jsx      # Rate limit warning
+│   │   │   └── RegisterForm.jsx       # Registration form component
 │   │   ├── lib/
-│   │   │   ├── axios.js           # Axios instance config
-│   │   │   └── utils.js           # Utility functions
+│   │   │   ├── axios.js               # Axios instance with interceptors
+│   │   │   └── utils.js               # Utility functions
 │   │   ├── pages/
-│   │   │   ├── CreatePage.jsx     # Create note page
-│   │   │   ├── HomePage.jsx       # Main notes listing
-│   │   │   └── NoteDetailPage.jsx # View/Edit note page
-│   │   ├── App.jsx                # Main app component
-│   │   ├── main.jsx               # React entry point
-│   │   └── index.css              # Global styles
+│   │   │   ├── CreatePage.jsx         # Create note page (protected)
+│   │   │   ├── HomePage.jsx           # Main notes listing (protected)
+│   │   │   ├── LoginPage.jsx          # Login page (guest only)
+│   │   │   ├── NoteDetailPage.jsx     # View/Edit note (protected)
+│   │   │   └── RegisterPage.jsx       # Registration page (guest only)
+│   │   ├── App.jsx                    # Main app with route guards
+│   │   ├── main.jsx                   # React entry point
+│   │   └── index.css                  # Global styles
 │   └── package.json
-└── package.json                    # Root package.json
+└── package.json                        # Root package.json
 ```
 
 ---
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint         | Description       |
-| ------ | ---------------- | ----------------- |
-| GET    | `/api/notes`     | Get all notes     |
-| GET    | `/api/notes/:id` | Get note by ID    |
-| POST   | `/api/notes`     | Create a new note |
-| PUT    | `/api/notes/:id` | Update note by ID |
-| DELETE | `/api/notes/:id` | Delete note by ID |
+### Authentication Routes (Public)
+
+| Method | Endpoint             | Description              | Rate Limit |
+| ------ | -------------------- | ------------------------ | ---------- |
+| POST   | `/api/auth/register` | Register new user        | IP-based   |
+| POST   | `/api/auth/login`    | Login user (returns JWT) | IP-based   |
+| POST   | `/api/auth/logout`   | Logout user              | IP-based   |
+
+**Request Body (Register):**
+
+```json
+{
+  "userName": "johndoe",
+  "email": "john@example.com",
+  "password": "securepassword123"
+}
+```
+
+**Request Body (Login):**
+
+```json
+{
+  "email": "john@example.com",
+  "password": "securepassword123"
+}
+```
+
+**Response (Login/Register):**
+
+```json
+{
+  "message": "Login successful",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "507f1f77bcf86cd799439011",
+    "userName": "johndoe",
+    "email": "john@example.com"
+  }
+}
+```
+
+### Notes Routes (Protected - Requires JWT)
+
+| Method | Endpoint         | Description             | Rate Limit |
+| ------ | ---------------- | ----------------------- | ---------- |
+| GET    | `/api/notes`     | Get all user's notes    | User-based |
+| GET    | `/api/notes/:id` | Get specific note by ID | User-based |
+| POST   | `/api/notes`     | Create a new note       | User-based |
+| PUT    | `/api/notes/:id` | Update note by ID       | User-based |
+| DELETE | `/api/notes/:id` | Delete note by ID       | User-based |
+
+**Authentication Header:**
+
+```
+Authorization: Bearer <your_jwt_token>
+```
+
+**Note:** All notes routes require a valid JWT token in the Authorization header. Users can only access their own notes.
+
+---
+
+## 🧪 Testing with Postman
+
+This project was extensively tested using **Postman** during development. A complete testing workflow ensures all endpoints function correctly with proper authentication.
+
+### Postman Setup
+
+1. **Create Environment Variables:**
+   - `BASE_URL`: `http://localhost:5001/api`
+   - `TOKEN`: (will be auto-saved after login)
+
+2. **Auto-Save Token Script:**
+
+Add this to the "Tests" tab of your login/register requests:
+
+```javascript
+if (pm.response.code === 200 || pm.response.code === 201) {
+  const response = pm.response.json();
+  pm.environment.set("TOKEN", response.token);
+}
+```
+
+3. **Set Authorization for Protected Routes:**
+   - Type: `Bearer Token`
+   - Token: `{{TOKEN}}`
+
+### Testing Workflow
+
+1. **Register a new user** → Token saved automatically
+2. **Login** → Token saved automatically
+3. **Test protected routes** → Token attached automatically
+4. **Test multi-user scenarios** → Register different users, verify note isolation
+5. **Test rate limiting** → Send rapid requests to trigger rate limiter
+
+**Collection Available:** If you'd like the full Postman collection, [contact me](#-author)!
 
 ---
 
@@ -211,15 +337,18 @@ This app is deployed on **Render** with the following configuration:
 
 3. **Environment Variables:**
    - `MONGO_URI`
+   - `JWT_SECRET`
    - `UPSTASH_REDIS_REST_URL`
    - `UPSTASH_REDIS_REST_TOKEN`
    - `PORT` (auto-set by Render)
+   - `NODE_ENV=production`
 
 ---
 
 ## 🎯 Future Enhancements
 
-- [ ] **User Authentication** - JWT-based login/signup system
+- [ ] **Password Reset** - Email-based password recovery system
+- [ ] **Profile Management** - Update username, email, and password
 - [ ] **Note Categories/Tags** - Organize notes with tags
 - [ ] **Search Functionality** - Search notes by title or content
 - [ ] **Rich Text Editor** - Markdown or WYSIWYG editor support
@@ -227,6 +356,7 @@ This app is deployed on **Render** with the following configuration:
 - [ ] **Note Sharing** - Share notes via public links
 - [ ] **Drag & Drop** - Reorder notes
 - [ ] **File Attachments** - Upload images/files to notes
+- [ ] **Two-Factor Authentication** - Enhanced security with 2FA
 
 ---
 
@@ -243,5 +373,5 @@ This app is deployed on **Render** with the following configuration:
 ## 📚 Acknowledgments
 
 - Inspired by the need for a simple, fast note-taking app
-- Built as a full-stack portfolio project
+- Built as a full-stack portfolio project with professional authentication patterns
 - Thanks to the MERN stack community for excellent documentation
