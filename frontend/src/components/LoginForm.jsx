@@ -57,6 +57,7 @@ const LoginForm = () => {
             <input
               type="text"
               placeholder="email"
+              autoComplete="email"
               className="input input-bordered"
               disabled={loading}
               value={email}
@@ -70,6 +71,7 @@ const LoginForm = () => {
             <input
               type="password"
               placeholder="password"
+              autoComplete="password"
               className="input input-bordered"
               disabled={loading}
               value={password}

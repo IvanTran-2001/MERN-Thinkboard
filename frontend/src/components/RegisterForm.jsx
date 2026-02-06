@@ -17,7 +17,7 @@ const RegisterForm = () => {
 
     try {
       // Make API call to register endpoint
-      const res = await api.post("/auth/register", { userName,email, password });
+      const res = await api.post("/auth/register", { userName, email, password });
 
       // Clear form fields
       setEmail("");
@@ -32,7 +32,6 @@ const RegisterForm = () => {
       toast.success("Registration successful!");
       navigate("/home"); // Redirect to home page after successful registration
     } catch (error) {
-      setPassword("");
       console.log("Error registering:", error);
       if (error.response?.status === 400) {
         toast.error(error.response.data.message || "Invalid registration details");
@@ -54,11 +53,11 @@ const RegisterForm = () => {
         <form onSubmit={handleSubmit}>
         <div className="form-control">
             <div className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text">Username</span>
             </div>
             <input
               type="text"
-              placeholder="Username"
+              placeholder="username"
               className="input input-bordered"
               disabled={loading}
               value={userName}
@@ -72,6 +71,7 @@ const RegisterForm = () => {
             <input
               type="text"
               placeholder="email"
+              autoComplete="email"
               className="input input-bordered"
               disabled={loading}
               value={email}
@@ -85,6 +85,7 @@ const RegisterForm = () => {
             <input
               type="password"
               placeholder="password"
+              autoComplete="password"
               className="input input-bordered"
               disabled={loading}
               value={password}
