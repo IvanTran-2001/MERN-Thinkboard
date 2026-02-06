@@ -17,7 +17,11 @@ const RegisterForm = () => {
 
     try {
       // Make API call to register endpoint
-      const res = await api.post("/auth/register", { userName, email, password });
+      const res = await api.post("/auth/register", {
+        userName,
+        email,
+        password,
+      });
 
       // Clear form fields
       setEmail("");
@@ -34,7 +38,9 @@ const RegisterForm = () => {
     } catch (error) {
       console.log("Error registering:", error);
       if (error.response?.status === 400) {
-        toast.error(error.response.data.message || "Invalid registration details");
+        toast.error(
+          error.response.data.message || "Invalid registration details",
+        );
       } else if (error.response?.status === 429) {
         toast.error("Too many registration attempts. Please try again later.");
       } else {
@@ -51,13 +57,14 @@ const RegisterForm = () => {
           Create Account
         </h1>
         <form onSubmit={handleSubmit}>
-        <div className="form-control">
+          <div className="form-control">
             <div className="label">
               <span className="label-text">Username</span>
             </div>
             <input
               type="text"
               placeholder="username"
+              autoComplete="username"
               className="input input-bordered"
               disabled={loading}
               value={userName}
@@ -69,7 +76,7 @@ const RegisterForm = () => {
               <span className="label-text">Email</span>
             </div>
             <input
-              type="text"
+              type="email"
               placeholder="email"
               autoComplete="email"
               className="input input-bordered"
@@ -85,7 +92,7 @@ const RegisterForm = () => {
             <input
               type="password"
               placeholder="password"
-              autoComplete="password"
+              autoComplete="new-password"
               className="input input-bordered"
               disabled={loading}
               value={password}
@@ -101,7 +108,7 @@ const RegisterForm = () => {
             >
               {loading ? (
                 <>
-                Signing Up
+                  Signing Up
                   <span className="loading loading-dots loading-md"></span>
                 </>
               ) : (

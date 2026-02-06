@@ -55,7 +55,7 @@ const LoginForm = () => {
               <span className="label-text">Email</span>
             </div>
             <input
-              type="text"
+              type="email"
               placeholder="email"
               autoComplete="email"
               className="input input-bordered"
@@ -71,7 +71,7 @@ const LoginForm = () => {
             <input
               type="password"
               placeholder="password"
-              autoComplete="password"
+              autoComplete="current-password"
               className="input input-bordered"
               disabled={loading}
               value={password}
@@ -87,7 +87,7 @@ const LoginForm = () => {
             >
               {loading ? (
                 <>
-                Signing in
+                  Signing in
                   <span className="loading loading-dots loading-md"></span>
                 </>
               ) : (
