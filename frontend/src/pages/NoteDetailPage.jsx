@@ -57,7 +57,7 @@ const NoteDetailPage = () => {
         content: note.content,
       });
       toast.success("Note updated successfully!");
-      navigate(`/`);
+      navigate(`/home`);
     } catch (error) {
       console.log("Error saving note:", error);
       toast.error("Failed to save note. Please try again.");

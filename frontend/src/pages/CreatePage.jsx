@@ -23,7 +23,7 @@ const CreatePage = () => {
     try {
       await api.post("/notes", { title, content });
       toast.success("Note created successfully!");
-      navigate(`/`);
+      navigate(`/home`);
     } catch (error) {
       console.log("Error creating note:", error);
       if (error.response?.status === 429) {

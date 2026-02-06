@@ -1,6 +1,7 @@
 import React from 'react'
 import api from '../lib/axios';
 import toast from 'react-hot-toast';
+import { Navigate } from 'react-router';
 
 const LoginForm = () => {
     const [email, setEmail] = React.useState("");
@@ -16,6 +17,7 @@ const LoginForm = () => {
             toast.success("Login successful!");
             setEmail("");
             setPassword("");
+            Navigate("/home"); // Redirect to home page after successful login
         } catch (error) {
             setPassword("");
             console.log("Error logging in:", error);
