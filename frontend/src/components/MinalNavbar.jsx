@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const MinalNavbar = () => {
   return (
@@ -8,12 +8,11 @@ const MinalNavbar = () => {
           <h1 className="text-3xl font-bold text-primary font-mono tracking-tighter">
             Think Board
           </h1>
-          <div className="flex items-center gap-4">
-          </div>
+          <div className="flex items-center gap-4"></div>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default MinalNavbar
+export default MinalNavbar;
