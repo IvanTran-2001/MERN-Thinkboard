@@ -5,11 +5,15 @@ import toast from "react-hot-toast";
 import NoteCard from "../components/NoteCard";
 import api from "../lib/axios";
 import NotesNotFound from "../components/NotesNotFound";
+import UtilityBar from "../components/UtilityBar";
+import { filterNotes, sortNotes } from "../lib/utils.js";
 
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState("newest");
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -32,6 +36,7 @@ const HomePage = () => {
     fetchNotes();
   }, []);
 
+
   return (
     <div className="min-h-screen">
       <NavBar />
@@ -42,12 +47,21 @@ const HomePage = () => {
           <div className="text-center text-primary py-10">Loading Notes...</div>
         )}
         {notes.length === 0 && !loading && !isRateLimited && <NotesNotFound />}
+        
         {notes.length > 0 && !isRateLimited && (
+          <>
+          <UtilityBar 
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            sortOption={sortOption}
+            setSortOption={setSortOption}
+          />  
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {notes.map((note) => (
+            {sortNotes(filterNotes(notes, searchQuery), sortOption).map((note) => (
               <NoteCard key={note._id} note={note} setNotes={setNotes} />
             ))}
           </div>
+          </>
         )}
       </div>
     </div>

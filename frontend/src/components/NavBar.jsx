@@ -1,17 +1,28 @@
 import React from "react";
 import { Link } from "react-router";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon, MenuIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const NavBar = () => {
-  const [userName, _] = React.useState("User"); // Placeholder for user name
   const navigate = useNavigate();
 
   const handleLogout = () => {
     toast.success("Logged out successfully!");
     localStorage.removeItem("token"); // Show logout success message
     navigate("/"); // Redirect to login page after logout
+  };
+
+  const handleProfile = () => {
+    toast("Profile page is under construction!", {
+      icon: "👷",
+    });
+  };
+  
+  const handleSettings = () => {
+    toast("Settings page is under construction!", {
+      icon: "👷",
+    });
   };
 
   return (
@@ -27,15 +38,15 @@ const NavBar = () => {
               <span>New Note</span>
             </Link>
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost">
-                {userName}
+              <label tabIndex={0} className="btn btn-ghost btn-circle">
+                <MenuIcon className="size-5" />
               </label>
               <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-50">
                 <li>
-                  <a>Profile</a>
+                  <button onClick={handleProfile}>Profile</button>
                 </li>
                 <li>
-                  <a>Settings</a>
+                  <button onClick={handleSettings}>Settings</button>
                 </li>
                 <li>
                   <button onClick={handleLogout}>Logout</button>
