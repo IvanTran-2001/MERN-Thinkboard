@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Prevent zoom on mobile */
+  html {
+    touch-action: pan-x pan-y;
+    -ms-touch-action: pan-x pan-y;
+  }
+  
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents iOS auto-zoom on focus */
+  }
+}

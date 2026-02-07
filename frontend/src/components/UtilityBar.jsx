@@ -38,31 +38,32 @@ const UtilityBar = ({
       </div>
 
       {/* Sort dropdown */}
-      <div className="dropdown dropdown-end">
-        <label tabIndex={0} className="btn btn-outline gap-2">
+      <details className="dropdown dropdown-end">
+        <summary className="btn btn-outline gap-2 cursor-pointer">
           {Icon && <Icon className="size-5" />}
           {currentSort?.label}
-        </label>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2"
-        >
+        </summary>
+        <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2 z-[100]">
           {sortOptions.map((option) => {
             const OptionIcon = option.icon;
             return (
               <li key={option.value}>
-                <button
-                  onClick={() => setSortOption(option.value)}
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSortOption(option.value);
+                    document.activeElement.blur(); // Close dropdown
+                  }}
                   className={sortOption === option.value ? "active" : ""}
                 >
                   <OptionIcon className="size-5" />
                   {option.label}
-                </button>
+                </a>
               </li>
             );
           })}
         </ul>
-      </div>
+      </details>
     </div>
   );
 };
