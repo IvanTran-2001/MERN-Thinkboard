@@ -24,7 +24,7 @@ const UtilityBar = ({
   const Icon = currentSort?.icon;
 
   return (
-    <div className="sticky top-0 z-10 bg-base-200 flex gap-4 p-4 mb-6 rounded-lg">
+    <div className="sticky top-0 z-10 bg-base-200 flex gap-4 p-4 mb-6 rounded-lg justify-between items-center">
       {/* Search input */}
       <div className="relative flex-1 max-w-xs">
         <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 size-5 text-base-content/50" />

@@ -13,9 +13,9 @@ import GuestRoute from "./auth/GuestRoute.jsx";
 
 const App = () => {
   return (
-    <div className="h-full w-full" theme="forest">
+    <div className="min-h-screen w-full" theme="forest">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#00FF9D40_100%)]" />
+      <div className="fixed inset-0 -z-10 w-full h-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_60%,#00FF9D40_100%)]" />
 
       <Routes>
         {/* Guest Routes - For non-authenticated users */}
