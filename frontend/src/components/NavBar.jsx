@@ -18,7 +18,7 @@ const NavBar = () => {
       icon: "👷",
     });
   };
-  
+
   const handleSettings = () => {
     toast("Settings page is under construction!", {
       icon: "👷",

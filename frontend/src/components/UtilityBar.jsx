@@ -1,15 +1,26 @@
-import React from 'react';
-import { SearchIcon, ArrowDownWideNarrow, ArrowUpNarrowWide, ArrowDownAZ, ArrowUpZA } from 'lucide-react';
+import React from "react";
+import {
+  SearchIcon,
+  ArrowDownWideNarrow,
+  ArrowUpNarrowWide,
+  ArrowDownAZ,
+  ArrowUpZA,
+} from "lucide-react";
 
-const UtilityBar = ({ searchQuery, setSearchQuery, sortOption, setSortOption }) => {
+const UtilityBar = ({
+  searchQuery,
+  setSearchQuery,
+  sortOption,
+  setSortOption,
+}) => {
   const sortOptions = [
-    { value: 'newest', label: 'Newest First', icon: ArrowDownWideNarrow },
-    { value: 'oldest', label: 'Oldest First', icon: ArrowUpNarrowWide },
-    { value: 'title-asc', label: 'Title A-Z', icon: ArrowDownAZ },
-    { value: 'title-desc', label: 'Title Z-A', icon: ArrowUpZA },
+    { value: "newest", label: "Newest First", icon: ArrowDownWideNarrow },
+    { value: "oldest", label: "Oldest First", icon: ArrowUpNarrowWide },
+    { value: "title-asc", label: "Title A-Z", icon: ArrowDownAZ },
+    { value: "title-desc", label: "Title Z-A", icon: ArrowUpZA },
   ];
 
-  const currentSort = sortOptions.find(opt => opt.value === sortOption);
+  const currentSort = sortOptions.find((opt) => opt.value === sortOption);
   const Icon = currentSort?.icon;
 
   return (
@@ -32,14 +43,17 @@ const UtilityBar = ({ searchQuery, setSearchQuery, sortOption, setSortOption }) 
           {Icon && <Icon className="size-5" />}
           {currentSort?.label}
         </label>
-        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2">
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2"
+        >
           {sortOptions.map((option) => {
             const OptionIcon = option.icon;
             return (
               <li key={option.value}>
                 <button
                   onClick={() => setSortOption(option.value)}
-                  className={sortOption === option.value ? 'active' : ''}
+                  className={sortOption === option.value ? "active" : ""}
                 >
                   <OptionIcon className="size-5" />
                   {option.label}
@@ -53,4 +67,4 @@ const UtilityBar = ({ searchQuery, setSearchQuery, sortOption, setSortOption }) 
   );
 };
 
-export default UtilityBar
+export default UtilityBar;
