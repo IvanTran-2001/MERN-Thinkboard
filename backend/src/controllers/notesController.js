@@ -15,13 +15,13 @@ export async function getAllNotes(req, res) {
     const notes = await Note.find({ user: req.user._id }).sort({
       createdAt: 1,
     });
-    
+
     // Return notes as JSON response
     res.status(200).json(notes);
   } catch (error) {
     // Log error for debugging
     console.error("Error fetching notes:", error.message);
-    
+
     // Send generic server error response
     res.status(500).json({ message: "Server Error" });
   }
@@ -37,9 +37,9 @@ export async function getNoteById(req, res) {
       _id: req.params.id,
       user: req.user._id,
     });
-    
+
     if (!noteId) return res.status(404).json({ message: "Note not found" });
-    
+
     res.status(200).json(noteId);
   } catch (error) {
     console.error("Error finding note:", error.message);
@@ -53,11 +53,11 @@ export async function getNoteById(req, res) {
 export async function createNote(req, res) {
   try {
     const { title, content } = req.body;
-    
+
     // Create new note with user reference
     const newNote = new Note({ title, content, user: req.user._id });
     await newNote.save();
-    
+
     res.status(201).json({ message: "note created", title: newNote.title });
   } catch (error) {
     console.error("Error creating note:", error.message);

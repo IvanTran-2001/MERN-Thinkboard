@@ -2,7 +2,7 @@
  * Route guard requiring authentication - Redirects to login if no token found
  */
 
-import { Navigate, Outlet } from "react-router"; 
+import { Navigate, Outlet } from "react-router";
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem("token");

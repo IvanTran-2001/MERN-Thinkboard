@@ -2,7 +2,7 @@
  * Route guard for guest-only pages - Redirects authenticated users to home
  */
 
-import { Navigate, Outlet } from "react-router"; 
+import { Navigate, Outlet } from "react-router";
 
 const GuestRoute = () => {
   const token = localStorage.getItem("token");

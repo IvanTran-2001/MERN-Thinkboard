@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== "production") {
 
 /**
  * JSON Body Parser Middleware
- * 
+ *
  * Parses incoming JSON request bodies and makes data available at req.body.
  * Required for POST/PUT requests with JSON payloads.
  */
@@ -38,11 +38,11 @@ app.use(express.json());
 
 /**
  * Route Configuration
- * 
+ *
  * Authentication Routes: /api/auth/*
  * - Applied middleware: Rate limiter (IP-based, 5 req/10sec)
  * - Public routes: register, login, logout
- * 
+ *
  * Notes Routes: /api/notes/*
  * - Applied middleware: JWT protect (all routes), Rate limiter (user-based, 10 req/10sec)
  * - Protected routes: CRUD operations for notes
@@ -52,7 +52,7 @@ app.use("/api/notes", notesRoutes);
 
 /**
  * Production Configuration - Serve Frontend
- * 
+ *
  * In production, serve the built React app from the /dist folder.
  * All non-API routes are handled by React Router (client-side routing).
  */
@@ -69,7 +69,7 @@ if (process.env.NODE_ENV === "production") {
 
 /**
  * Server Initialization
- * 
+ *
  * 1. Connect to MongoDB database
  * 2. Start Express server on specified PORT
  * 3. Log success message or exit on failure

@@ -24,7 +24,7 @@ const noteSchema = new mongoose.Schema(
       index: true, // Index for faster queries by user
     },
   },
-  { 
+  {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
   },
 );
