@@ -363,7 +363,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - 💼 GitHub: [@IvanTran-2001](https://github.com/IvanTran-2001)
 - 💼 LinkedIn: [Ivan Tran](https://linkedin.com/in/ivan-tran-76164017a)
 - 🌐 Portfolio: [ivantran-2001.github.io](https://ivantran-2001.github.io/)
-- 📧 Email: ivandt2001@gmail.com
+- 📧 Email: mystoganx2001@gmail.com
 
 ---
 
