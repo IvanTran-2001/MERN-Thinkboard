@@ -1,3 +1,7 @@
+/**
+ * Login form with authentication, token storage, and error handling
+ */
+
 import React from "react";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
@@ -10,6 +14,7 @@ const LoginForm = () => {
   const [loading, setLoading] = React.useState(false);
   const navigate = useNavigate();
 
+  // Handle login form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

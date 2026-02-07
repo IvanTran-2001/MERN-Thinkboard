@@ -1,7 +1,15 @@
+/**
+ * JWT Authentication Middleware
+ * Verifies JWT token from Authorization header and attaches user to req.user
+ */
+
 import jwt from "jsonwebtoken";
 import User from "../models/Users.js";
 import { AUTH_ERRORS } from "../constants/authMessages.js";
 
+/**
+ * Protect middleware - Verify JWT and authenticate user
+ */
 export const protect = async (req, res, next) => {
   try {
     // Get token from Authorization header

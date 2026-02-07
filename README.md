@@ -77,10 +77,10 @@ A full-stack authenticated note-taking application built with the MERN stack (Mo
 
 ### Prerequisites
 
-- **Postman** (optional, for API testing - [Download Postman](https://www.postman.com/))
 - **Node.js** (v16 or higher)
 - **MongoDB** account ([MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 - **Upstash** account ([Upstash Redis](https://upstash.com/))
+- **Postman** (optional, for API testing - [Download Postman](https://www.postman.com/))
 
 ### Installation
 
@@ -280,43 +280,6 @@ Authorization: Bearer <your_jwt_token>
 
 ---
 
-## 🧪 Testing with Postman
-
-This project was extensively tested using **Postman** during development. A complete testing workflow ensures all endpoints function correctly with proper authentication.
-
-### Postman Setup
-
-1. **Create Environment Variables:**
-   - `BASE_URL`: `http://localhost:5001/api`
-   - `TOKEN`: (will be auto-saved after login)
-
-2. **Auto-Save Token Script:**
-
-Add this to the "Tests" tab of your login/register requests:
-
-```javascript
-if (pm.response.code === 200 || pm.response.code === 201) {
-  const response = pm.response.json();
-  pm.environment.set("TOKEN", response.token);
-}
-```
-
-3. **Set Authorization for Protected Routes:**
-   - Type: `Bearer Token`
-   - Token: `{{TOKEN}}`
-
-### Testing Workflow
-
-1. **Register a new user** → Token saved automatically
-2. **Login** → Token saved automatically
-3. **Test protected routes** → Token attached automatically
-4. **Test multi-user scenarios** → Register different users, verify note isolation
-5. **Test rate limiting** → Send rapid requests to trigger rate limiter
-
-**Collection Available:** If you'd like the full Postman collection, [contact me](#-author)!
-
----
-
 ## 🚢 Deployment
 
 This app is deployed on **Render** with the following configuration:
@@ -360,18 +323,38 @@ This app is deployed on **Render** with the following configuration:
 
 ---
 
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+**TL;DR**: You can use, modify, and distribute this project freely with attribution.
+
+---
+
 ## 👤 Author
 
 **Ivan Tran**
 
-- GitHub: [@IvanTran-2001](https://github.com/IvanTran-2001)
-- LinkedIn: [Ivan Tran](https://linkedin.com/in/ivan-tran-76164017a)
-- Portfolio: [ivantran-2001.github.io](https://ivantran-2001.github.io/)
+- 💼 GitHub: [@IvanTran-2001](https://github.com/IvanTran-2001)
+- 💼 LinkedIn: [Ivan Tran](https://linkedin.com/in/ivan-tran-76164017a)
+- 🌐 Portfolio: [ivantran-2001.github.io](https://ivantran-2001.github.io/)
+- 📧 Email: ivandt2001@gmail.com
 
 ---
 
-## 📚 Acknowledgments
+## 🙏 Acknowledgments
 
-- Inspired by the need for a simple, fast note-taking app
-- Built as a full-stack portfolio project with professional authentication patterns
-- Thanks to the MERN stack community for excellent documentation
+- Inspired by the need for a simple, secure, and fast note-taking app
+- Built as a full-stack portfolio project demonstrating professional authentication patterns and modern web development practices
+- Thanks to the MERN stack community for excellent documentation and resources
+- Special thanks to all contributors who help improve this project
+
+---
+
+## ⭐ Show Your Support
+
+If you found this project helpful or learned something from it, please consider giving it a ⭐️ on GitHub!
+
+---
+
+**Made with ❤️ and ☕ by Ivan Tran**

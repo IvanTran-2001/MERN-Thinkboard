@@ -1,3 +1,7 @@
+/**
+ * Authentication Controller - Handles user registration, login, and logout
+ */
+
 import User from "../models/Users.js";
 import { generateToken } from "../utils/generateToken.js";
 import {
@@ -5,6 +9,10 @@ import {
   validateLoginCredentials,
 } from "../utils/validation.js";
 
+/**
+ * Register new user - validates input, checks for duplicates, hashes password
+ * Returns JWT token for immediate authentication
+ */
 export async function registerUser(req, res) {
   try {
     const { userName, email, password } = req.body;
@@ -42,6 +50,9 @@ export async function registerUser(req, res) {
   }
 }
 
+/**
+ * Login user - validates credentials and returns JWT token
+ */
 export async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
@@ -76,6 +87,9 @@ export async function loginUser(req, res) {
   }
 }
 
+/**
+ * Logout user - client-side token removal (stateless JWT)
+ */
 export async function logoutUser(req, res) {
   try {
     res.status(200).json({ message: "Logout successful" });
