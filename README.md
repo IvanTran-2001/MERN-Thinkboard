@@ -369,10 +369,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🙏 Acknowledgments
 
-- Inspired by the need for a simple, secure, and fast note-taking app
-- Built as a full-stack portfolio project demonstrating professional authentication patterns and modern web development practices
+- Built as a full-stack learning project to develop professional skills in modern web development and authentication patterns
+- Inspired by [this MERN Stack tutorial by As a Programmer](https://www.youtube.com/watch?v=F9gB5b4jgOI) - adapted and expanded with additional features like search/sort functionality and enhanced mobile responsiveness
 - Thanks to the MERN stack community for excellent documentation and resources
-- Special thanks to all contributors who help improve this project
 
 ---
 
