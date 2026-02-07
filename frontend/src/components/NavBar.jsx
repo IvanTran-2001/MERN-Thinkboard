@@ -41,7 +41,10 @@ const NavBar = () => {
               <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <MenuIcon className="size-5" />
               </label>
-              <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box z-50">
+              <ul 
+                tabIndex={0} 
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-[100] mt-3"
+              >
                 <li>
                   <button onClick={handleProfile}>Profile</button>
                 </li>
