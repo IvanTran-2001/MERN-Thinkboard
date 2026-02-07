@@ -18,7 +18,8 @@ A full-stack authenticated note-taking application built with the MERN stack (Mo
 - **👤 User Accounts** - Register, login, and manage personal accounts with password hashing (bcrypt)
 - **🔒 Protected Routes** - Frontend and backend route protection ensuring only authenticated users can access their notes
 - **📝 User-Specific Notes** - Each user's notes are private and isolated from other users
-- **🔌 RESTful API** - Full CRUD functionality with proper HTTP methods and status codes
+- **� Search & Sort** - Real-time search by title/content and sort by date or alphabetically
+- **�🔌 RESTful API** - Full CRUD functionality with proper HTTP methods and status codes
 - **🎨 Modern UI/UX** - Clean, responsive design with TailwindCSS and DaisyUI
 - **🚀 Real-time Updates** - Instant feedback with toast notifications
 - **🛡️ Smart Rate Limiting** - IP-based rate limiting for auth routes, user-based for protected routes using Upstash Redis
@@ -57,19 +58,23 @@ A full-stack authenticated note-taking application built with the MERN stack (Mo
 
 ## 📸 Screenshots
 
-### Home Page - Notes Grid
+### Home Page with Search & Sort
 
-![Home Page](https://via.placeholder.com/800x450/4f46e5/ffffff?text=Home+Page+-+Add+Your+Screenshot)
+![Home Page](./frontend/public/screenshots/home-page.png)
 
-### Create Note Page
-
-![Create Note](https://via.placeholder.com/800x450/10b981/ffffff?text=Create+Note+-+Add+Your+Screenshot)
+_Real-time search and sort functionality with a clean notes grid layout_
 
 ### Note Detail & Edit
 
-![Note Detail](https://via.placeholder.com/800x450/f59e0b/ffffff?text=Note+Detail+-+Add+Your+Screenshot)
+![Note Detail](./frontend/public/screenshots/note-detail.png)
 
-> **Tip:** Replace the placeholder URLs above with your actual screenshots!
+_Edit your notes with a simple and intuitive interface_
+
+### Login Page
+
+![Login Page](./frontend/public/screenshots/login-page.png)
+
+_Secure authentication with JWT tokens_
 
 ---
 
@@ -198,7 +203,8 @@ MERN-Thinkboard/
 │   │   │   ├── NoteCard.jsx           # Individual note display
 │   │   │   ├── NotesNotFound.jsx      # Empty state component
 │   │   │   ├── RateLimitedUI.jsx      # Rate limit warning
-│   │   │   └── RegisterForm.jsx       # Registration form component
+│   │   │   ├── RegisterForm.jsx       # Registration form component
+│   │   │   └── UtilityBar.jsx         # Search and sort controls
 │   │   ├── lib/
 │   │   │   ├── axios.js               # Axios instance with interceptors
 │   │   │   └── utils.js               # Utility functions
@@ -313,13 +319,13 @@ This app is deployed on **Render** with the following configuration:
 - [ ] **Password Reset** - Email-based password recovery system
 - [ ] **Profile Management** - Update username, email, and password
 - [ ] **Note Categories/Tags** - Organize notes with tags
-- [ ] **Search Functionality** - Search notes by title or content
 - [ ] **Rich Text Editor** - Markdown or WYSIWYG editor support
 - [ ] **Dark Mode** - Theme toggle
 - [ ] **Note Sharing** - Share notes via public links
 - [ ] **Drag & Drop** - Reorder notes
 - [ ] **File Attachments** - Upload images/files to notes
 - [ ] **Two-Factor Authentication** - Enhanced security with 2FA
+- [ ] **Pagination** - Load notes in batches for better performance
 
 ---
 
