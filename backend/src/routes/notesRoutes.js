@@ -13,6 +13,8 @@ import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
+// Protected will grab userID from JWT and attach user to req.user
+// Important to execute protect before accessing req.user
 router.use(protect);
 router.use(rateLimiter);
 
