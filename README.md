@@ -58,23 +58,42 @@ A full-stack authenticated note-taking application built with the MERN stack (Mo
 
 ## 📸 Screenshots
 
-### Home Page with Search & Sort
+### 🖥️ Home Page with Search & Sort
 
-![Home Page](./frontend/public/screenshots/home-page.png)
+![Home Page Desktop](./frontend/public/screenshots/pc_home.png)
 
-_Real-time search and sort functionality with a clean notes grid layout_
+*Features a responsive notes grid with real-time search functionality and multiple sorting options (Newest First, Oldest First, A-Z, Z-A). Each note card displays the title, preview text, date, and quick action buttons for editing and deleting.*
 
-### Note Detail & Edit
+<div align="center">
+  <img src="./frontend/public/screenshots/mobile_home.jpg" alt="Home Page Mobile" width="300">
+  <p><em>Mobile View</em></p>
+</div>
 
-![Note Detail](./frontend/public/screenshots/note-detail.png)
+---
 
-_Edit your notes with a simple and intuitive interface_
+### ✏️ Create/Edit Note
 
-### Login Page
+![Create Note Desktop](./frontend/public/screenshots/pc_create.png)
 
-![Login Page](./frontend/public/screenshots/login-page.png)
+*Clean editing interface with dedicated fields for title and content. Save changes instantly or delete notes with a single click. Navigate back to your notes list anytime.*
 
-_Secure authentication with JWT tokens_
+<div align="center">
+  <img src="./frontend/public/screenshots/mob_create.jpg" alt="Create Note Mobile" width="300">
+  <p><em>Mobile View</em></p>
+</div>
+
+---
+
+### 🔐 Login Page
+
+![Login Desktop](./frontend/public/screenshots/pc_login.png)
+
+*Secure authentication with email and password. New users can easily register through the sign-up link. All passwords are hashed with bcrypt and sessions managed with JWT tokens.*
+
+<div align="center">
+  <img src="./frontend/public/screenshots/mob_login.jpg" alt="Login Mobile" width="300">
+  <p><em>Mobile View</em></p>
+</div>
 
 ---
 
