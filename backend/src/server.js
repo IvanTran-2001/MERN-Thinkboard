@@ -23,7 +23,7 @@ const __dirname = path.resolve();
 if (process.env.NODE_ENV !== "production") {
   app.use(
     cors({
-      origin: "http://localhost:5173", // Vite dev server
+      origin: ["http://localhost:5173", /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5173$/], // Vite dev server (localhost + any local network IP)
     }),
   );
 }

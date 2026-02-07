@@ -4,8 +4,18 @@
 
 import axios from "axios";
 
-const BASE_URL =
-  import.meta.env.MODE === "production" ? "/api" : "http://localhost:5001/api";
+// Dynamically determine backend URL based on current hostname
+const getBaseURL = () => {
+  if (import.meta.env.MODE === "production") {
+    return "/api";
+  }
+  
+  // Development: Use current hostname (works for localhost AND network IP)
+  const hostname = window.location.hostname;
+  return `http://${hostname}:5001/api`;
+};
+
+const BASE_URL = getBaseURL();
 
 const api = axios.create({
   baseURL: BASE_URL,
